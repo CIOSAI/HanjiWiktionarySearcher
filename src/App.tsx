@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import { Interact } from './Interact'
 
 function App() {
   return (
     <div className="App">
-      <h1> Boob </h1>
+      <Interact></Interact>
     </div>
   );
 }
