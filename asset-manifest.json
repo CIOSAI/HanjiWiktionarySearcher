@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/HanjiWiktionarySearcher/static/css/main.073c9b0a.css",
-    "main.js": "/HanjiWiktionarySearcher/static/js/main.aeb5e562.js",
-    "static/js/787.187b8664.chunk.js": "/HanjiWiktionarySearcher/static/js/787.187b8664.chunk.js",
-    "index.html": "/HanjiWiktionarySearcher/index.html",
-    "main.073c9b0a.css.map": "/HanjiWiktionarySearcher/static/css/main.073c9b0a.css.map",
-    "main.aeb5e562.js.map": "/HanjiWiktionarySearcher/static/js/main.aeb5e562.js.map",
-    "787.187b8664.chunk.js.map": "/HanjiWiktionarySearcher/static/js/787.187b8664.chunk.js.map"
+    "main.css": "/hanjiwiktionarysearcher/static/css/main.073c9b0a.css",
+    "main.js": "/hanjiwiktionarysearcher/static/js/main.8cf81d42.js",
+    "static/js/787.187b8664.chunk.js": "/hanjiwiktionarysearcher/static/js/787.187b8664.chunk.js",
+    "index.html": "/hanjiwiktionarysearcher/index.html",
+    "main.073c9b0a.css.map": "/hanjiwiktionarysearcher/static/css/main.073c9b0a.css.map",
+    "main.8cf81d42.js.map": "/hanjiwiktionarysearcher/static/js/main.8cf81d42.js.map",
+    "787.187b8664.chunk.js.map": "/hanjiwiktionarysearcher/static/js/787.187b8664.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.aeb5e562.js"
+    "static/js/main.8cf81d42.js"
   ]
 }
