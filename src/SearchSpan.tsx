@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { ReactElement, useEffect, useMemo } from 'react';
 import { useState } from 'react';
+import { JsxElement } from 'typescript';
 
 interface SearcherProps{
   character: string
@@ -8,6 +9,7 @@ interface SearcherProps{
 export function Searcher(prop:SearcherProps) {
   const [character, setCharacter] = useState(prop.character);
   const [fetchResult, setFetchResult] = useState("");
+  const [lister, setLister] = useState([<p></p>]);
 
   useMemo(() => {
     let url = "https://en.wiktionary.org/w/api.php?"; 
@@ -42,7 +44,14 @@ export function Searcher(prop:SearcherProps) {
       // langaugeItems 2 d array, [pronunciation][dialect]
       // console.log(languageItems)
 
-      
+      let entry:RegExpMatchArray = languageItems[0]!
+
+      setLister(
+        entry.map((v, i, arr)=>{
+        console.log(i)
+        return <p key={i}>{v}</p>
+      })
+      )
     }
   },[fetchResult])
 
@@ -50,7 +59,7 @@ export function Searcher(prop:SearcherProps) {
     <div className="dropdown">
       <span>{character}</span>
       <div className="dropdown-content">
-        <p>hello</p>
+      {lister}
       </div>
     </div>
   );
