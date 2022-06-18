@@ -1,10 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 
-export function Searcher() {
-  const [character, setCharacter] = useState("我");
+interface SearcherProps{
+  character: string
+}
+
+export function Searcher(prop:SearcherProps) {
+  const [character, setCharacter] = useState(prop.character);
   const [fetchResult, setFetchResult] = useState("");
-  const [parsed, setParsed] = useState("");
 
   useMemo(() => {
     let url = "https://en.wiktionary.org/w/api.php?"; 
@@ -33,10 +36,13 @@ export function Searcher() {
 
   useEffect(()=>{
     if(fetchResult.length>0){
-      setParsed(fetchResult.substring(
-        fetchResult.indexOf("===Pronunciation===")+19, 
-        fetchResult.indexOf("===Definitions===")
-        ))
+      let splitted = fetchResult.split(/={3}Pronunciation/)
+      let filtered = splitted.filter(v=>v.includes("zh")&&(!v.includes("{{character info}}")))
+      let languageItems = filtered.map(v=>v.match(/(\|)(\w+=[\p{Letter}]+)/gu))
+      // langaugeItems 2 d array, [pronunciation][dialect]
+      // console.log(languageItems)
+
+      
     }
   },[fetchResult])
 
@@ -44,7 +50,7 @@ export function Searcher() {
     <div className="dropdown">
       <span>{character}</span>
       <div className="dropdown-content">
-        <p>{parsed}</p>
+        <p>hello</p>
       </div>
     </div>
   );
