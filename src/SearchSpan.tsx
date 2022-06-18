@@ -11,6 +11,20 @@ export function Searcher(prop:SearcherProps) {
   const [fetchResult, setFetchResult] = useState("");
   const [lister, setLister] = useState([<p></p>]);
 
+  // enum languageCode{
+  //   m = "Mandarin",
+  //   c = "Cantonese",
+  //   h = "Hakka",
+  //   mn = "Hokkien"
+  // }
+
+  const languageCode:Map<string, string> = new Map([
+    ["m", "Mandarin"],
+    ["c", "Cantonese"],
+    ["h", "Hakka"],
+    ["mn", "Hokkien"]
+  ])
+
   useMemo(() => {
     let url = "https://en.wiktionary.org/w/api.php?"; 
     let params:Map<string, string> = new Map([ 
@@ -40,16 +54,17 @@ export function Searcher(prop:SearcherProps) {
     if(fetchResult.length>0){
       let splitted = fetchResult.split(/={3}Pronunciation/)
       let filtered = splitted.filter(v=>v.includes("zh")&&(!v.includes("{{character info}}")))
-      let languageItems = filtered.map(v=>v.match(/(\|)(\w+=[\p{Letter}]+)/gu))
+      let languageItems = filtered.map(v=>v.match(/(\|)(\w+=[\p{Letter}]+.*)/gu))
       // langaugeItems 2 d array, [pronunciation][dialect]
       // console.log(languageItems)
 
       let entry:RegExpMatchArray = languageItems[0]!
-
+      
       setLister(
         entry.map((v, i, arr)=>{
-        console.log(i)
-        return <p key={i}>{v}</p>
+          let k = v.substring(1, v.indexOf("="))
+          let content = v.substring(v.indexOf("=")+1)
+          return <p key={i}>{languageCode.has(k)?languageCode.get(k)+":"+content:""}</p>
       })
       )
     }
