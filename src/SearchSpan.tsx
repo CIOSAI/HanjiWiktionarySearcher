@@ -4,6 +4,7 @@ import { languageCode, LanguageItemReader, getLanguageItemReader} from './Langua
 
 interface SearcherProps{
   character: string
+  mask:Map<string, boolean>
 }
 
 export function Searcher(prop:SearcherProps) {
@@ -58,11 +59,11 @@ export function Searcher(prop:SearcherProps) {
           let k = v.substring(1, v.indexOf("="))
           let content:string[] = getLanguageItemReader(k)(v.substring(v.indexOf("=")+1))
           
-          toSetLister.push(<p>{ languageCode.get(k) }</p>)
+          if(prop.mask.get(k)) toSetLister.push(<p>{ languageCode.get(k) }</p>)
           for(let j=0; j<content.length; j++){
             let contentItem = content[j]
             toSetLister.push(
-              <p key={`${prefix}${i}-${j}`}>{languageCode.has(k)?
+              <p key={`${prefix}${i}-${j}`}>{(languageCode.has(k)&&prop.mask.get(k))?
                 "-"+
                 "\t"+
                 contentItem
@@ -87,7 +88,7 @@ export function Searcher(prop:SearcherProps) {
 
       setLister(toSetLister)
     }
-  },[fetchResult])
+  },[fetchResult, prop.mask])
 
   return (
     <div className="dropdown">

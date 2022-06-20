@@ -9,7 +9,6 @@ export function Interact() {
 
   function selectLanguage(tag:string, val:boolean):void{
     setSelectedLanguages(new Map(selectedLanguages.set(tag, val)))
-    console.log(selectedLanguages)
   }
 
   useEffect(()=>{
@@ -39,7 +38,7 @@ export function Interact() {
       <ul className='langSel'>{languageOptions}</ul>
       <div>
         {textArray.map(v=>{
-          return <Searcher key={v} character={v}></Searcher>
+          return <Searcher key={v} character={v} mask={selectedLanguages}></Searcher>
         })}
       </div>
     </div>
