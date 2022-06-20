@@ -13,6 +13,11 @@ export function Searcher(prop:SearcherProps) {
   const [lister, setLister] = useState([<p></p>]);
 
   useMemo(() => {
+    if(!character.match(/[\u4E00-\u9FFF]/u)){
+      setLister([<p>非漢字</p>])
+      return 0
+    }
+
     let url = "https://en.wiktionary.org/w/api.php?"; 
     let params:Map<string, string> = new Map([ 
       ["action", "query"],
