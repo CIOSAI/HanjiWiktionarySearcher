@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useMemo } from 'react';
 import { useState } from 'react';
-import { JsxElement } from 'typescript';
+import { languageCode, LanguageItemReader, getLanguageItemReader} from './LanguageItemReader';
 
 interface SearcherProps{
   character: string
@@ -10,20 +10,6 @@ export function Searcher(prop:SearcherProps) {
   const [character, setCharacter] = useState(prop.character);
   const [fetchResult, setFetchResult] = useState("");
   const [lister, setLister] = useState([<p></p>]);
-
-  // enum languageCode{
-  //   m = "Mandarin",
-  //   c = "Cantonese",
-  //   h = "Hakka",
-  //   mn = "Hokkien"
-  // }
-
-  const languageCode:Map<string, string> = new Map([
-    ["m", "Mandarin"],
-    ["c", "Cantonese"],
-    ["h", "Hakka"],
-    ["mn", "Hokkien"]
-  ])
 
   useMemo(() => {
     let url = "https://en.wiktionary.org/w/api.php?"; 
@@ -63,14 +49,28 @@ export function Searcher(prop:SearcherProps) {
 
       console.log(entry)
       
-      setLister(
-        entry.map((v, i, arr)=>{
-          let k = v.substring(1, v.indexOf("="))
-          let content = v.substring(v.indexOf("=")+1)
-          // console.log(content)
-          return <p key={i}>{languageCode.has(k)?languageCode.get(k)+":"+content:""}</p>
-      })
-      )
+      let toSetLister:JSX.Element[] = []
+      
+      for(let i=0; i<entry.length; i++){
+        let v = entry[i]
+        let k = v.substring(1, v.indexOf("="))
+        let content:string[] = getLanguageItemReader(k)(v.substring(v.indexOf("=")+1))
+        
+        toSetLister.push(<p>{ languageCode.get(k) }</p>)
+        for(let j=0; j<content.length; j++){
+          let contentItem = content[j]
+          toSetLister.push(
+            <p key={`${i}-${j}`}>{languageCode.has(k)?
+              "-"+
+              "\t"+
+              contentItem
+              :""
+              }</p>
+          )
+        }
+      }
+
+      setLister(toSetLister)
     }
   },[fetchResult])
 
