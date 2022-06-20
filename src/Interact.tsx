@@ -17,7 +17,7 @@ export function Interact() {
     for(let i of Array.from(languageCode.keys())){
       toSetLanguageOptions.push(
         <li key={i}>
-          <input type={"checkbox"} name={i} checked={i==languageCodeEnum.MANDARIN} onClick={(evt)=>{
+          <input type={"checkbox"} name={i} checked={i==languageCodeEnum.MANDARIN} onChange={(evt)=>{
             selectLanguage(evt.currentTarget.name, evt.currentTarget.checked)
           }}></input>
           <label>{languageCode.get(i)}</label>
