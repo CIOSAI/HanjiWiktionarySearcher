@@ -40,7 +40,7 @@ export function Searcher(prop:SearcherProps) {
     if(fetchResult.length>0){
       let splitted = fetchResult.split(/={3}Pronunciation/)
       let filtered = splitted.filter(v=>v.includes("zh")&&(!v.includes("{{character info")))
-      let languageItems = filtered.map(v=>v.match(/(\|)(\w+-?\w*=[\p{Letter}]+.*)/gu))
+      let languageItems = filtered.map(v=>v.match(/(\|)(\w+(-_)?\w*=[\p{Letter}]+.*)/gu))
       // langaugeItems 2 d array, [pronunciation][dialect]
       // console.log(filtered)
       // console.log(languageItems)
