@@ -5,6 +5,12 @@ import { languageCode } from './LanguageItemReader'
 export function Interact() {
   const [textArray, setTextArray] = useState([""]);
   const [languageOptions, setLanguageOptions] = useState([<p key={"wtf bro"}></p>]);
+  const [selectedLanguages, setSelectedLanguages] = useState(new Map());
+
+  function selectLanguage(tag:string, val:boolean):void{
+    setSelectedLanguages(new Map(selectedLanguages.set(tag, val)))
+    console.log(selectedLanguages)
+  }
 
   useEffect(()=>{
 
@@ -12,10 +18,13 @@ export function Interact() {
     for(let i of Array.from(languageCode.keys())){
       toSetLanguageOptions.push(
         <li key={i}>
-          <input type={"checkbox"} name={i}></input>
+          <input type={"checkbox"} name={i} onClick={(evt)=>{
+            selectLanguage(evt.currentTarget.name, evt.currentTarget.checked)
+          }}></input>
           <label>{languageCode.get(i)}</label>
         </li>
       )
+      selectLanguage(i, false)
     }
     setLanguageOptions(toSetLanguageOptions)
 
