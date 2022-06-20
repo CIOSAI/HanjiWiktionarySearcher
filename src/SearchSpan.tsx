@@ -80,7 +80,7 @@ export function Searcher(prop:SearcherProps) {
       }
       else{
         languageItems.forEach((entry, ind, arr)=>{
-          toSetLister.push(<p>{`- Pronunciation ${ind+1} -`}</p>)
+          toSetLister.push(<p><b>{`Pronunciation ${ind+1}`}</b></p>)
           entryMaker(entry!, ind.toString())
         })
       }
