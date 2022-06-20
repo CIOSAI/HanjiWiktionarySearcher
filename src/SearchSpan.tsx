@@ -44,14 +44,21 @@ export function Searcher(prop:SearcherProps) {
 
   useEffect(()=>{
     if(fetchResult.length>0){
-      let splitted = fetchResult.split(/={3}Pronunciation/)
+      let splitted = fetchResult.split(/={3}Pronunciation/).map(v=>
+        v.includes("===Definitions===")?
+        v.substring(0, v.indexOf("===Definitions===")):v
+      )
       let filtered = splitted.filter(v=>
-        v.includes("zh")&&
+        v.includes("zh-pron")&&
         (!v.includes("{{character info"))&&
         (!v.includes("{{zh-see"))
       )
       let languageItems = filtered.map(v=>v.match(/(\|)(\w+(-_)?\w*=[\p{Letter}]+.*)/gu))
       // langaugeItems 2 d array, [pronunciation][dialect]
+      // console.log("splitted")
+      // console.log(splitted)
+      // console.log("flitered")
+      // console.log(filtered)
 
       let toSetLister:JSX.Element[] = []
 
