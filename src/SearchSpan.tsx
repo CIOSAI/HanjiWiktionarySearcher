@@ -47,7 +47,7 @@ export function Searcher(prop:SearcherProps) {
 
       let entry:RegExpMatchArray = languageItems[0]!
 
-      console.log(entry)
+      console.log(languageItems)
       
       let toSetLister:JSX.Element[] = []
       
