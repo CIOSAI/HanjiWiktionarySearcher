@@ -45,29 +45,44 @@ export function Searcher(prop:SearcherProps) {
       // console.log(filtered)
       // console.log(languageItems)
 
-      let entry:RegExpMatchArray = languageItems[0]!
+      // let entry:RegExpMatchArray = languageItems[0]!
 
       console.log(languageItems)
-      
+
       let toSetLister:JSX.Element[] = []
-      
-      for(let i=0; i<entry.length; i++){
-        let v = entry[i]
-        let k = v.substring(1, v.indexOf("="))
-        let content:string[] = getLanguageItemReader(k)(v.substring(v.indexOf("=")+1))
-        
-        toSetLister.push(<p>{ languageCode.get(k) }</p>)
-        for(let j=0; j<content.length; j++){
-          let contentItem = content[j]
-          toSetLister.push(
-            <p key={`${i}-${j}`}>{languageCode.has(k)?
-              "-"+
-              "\t"+
-              contentItem
-              :""
-              }</p>
-          )
+
+      const entryMaker = (value:RegExpMatchArray, prefix:string="") =>{
+
+        for(let i=0; i<value.length; i++){
+          let v = value[i]
+          let k = v.substring(1, v.indexOf("="))
+          let content:string[] = getLanguageItemReader(k)(v.substring(v.indexOf("=")+1))
+          
+          toSetLister.push(<p>{ languageCode.get(k) }</p>)
+          for(let j=0; j<content.length; j++){
+            let contentItem = content[j]
+            toSetLister.push(
+              <p key={`${prefix}${i}-${j}`}>{languageCode.has(k)?
+                "-"+
+                "\t"+
+                contentItem
+                :""
+                }</p>
+            )
+          }
         }
+
+      }
+
+      if(languageItems.length==1){
+        let entry:RegExpMatchArray = languageItems[0]!
+        entryMaker(entry)
+      }
+      else{
+        languageItems.forEach((entry, ind, arr)=>{
+          toSetLister.push(<p>{`- Pronunciation ${ind+1} -`}</p>)
+          entryMaker(entry!, ind.toString())
+        })
       }
 
       setLister(toSetLister)
