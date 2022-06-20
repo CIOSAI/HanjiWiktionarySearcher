@@ -1,4 +1,4 @@
-enum languageCodeEnum{
+export enum languageCodeEnum{
   MANDARIN = "m",
   CANTONESE = "c",
   HAKKA = "h",

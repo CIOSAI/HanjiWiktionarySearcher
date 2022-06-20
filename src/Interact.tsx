@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Searcher} from './SearchSpan'
-import { languageCode } from './LanguageItemReader'
+import { languageCodeEnum, languageCode } from './LanguageItemReader'
 
 export function Interact() {
   const [textArray, setTextArray] = useState([""]);
@@ -17,7 +17,7 @@ export function Interact() {
     for(let i of Array.from(languageCode.keys())){
       toSetLanguageOptions.push(
         <li key={i}>
-          <input type={"checkbox"} name={i} onClick={(evt)=>{
+          <input type={"checkbox"} name={i} checked={i==languageCodeEnum.MANDARIN} onClick={(evt)=>{
             selectLanguage(evt.currentTarget.name, evt.currentTarget.checked)
           }}></input>
           <label>{languageCode.get(i)}</label>
