@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/HanjiWiktionarySearcher/static/css/main.05be7748.css",
-    "main.js": "/HanjiWiktionarySearcher/static/js/main.b9d6caef.js",
+    "main.js": "/HanjiWiktionarySearcher/static/js/main.c5d81758.js",
     "static/js/787.187b8664.chunk.js": "/HanjiWiktionarySearcher/static/js/787.187b8664.chunk.js",
     "index.html": "/HanjiWiktionarySearcher/index.html",
     "main.05be7748.css.map": "/HanjiWiktionarySearcher/static/css/main.05be7748.css.map",
-    "main.b9d6caef.js.map": "/HanjiWiktionarySearcher/static/js/main.b9d6caef.js.map",
+    "main.c5d81758.js.map": "/HanjiWiktionarySearcher/static/js/main.c5d81758.js.map",
     "787.187b8664.chunk.js.map": "/HanjiWiktionarySearcher/static/js/787.187b8664.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.05be7748.css",
-    "static/js/main.b9d6caef.js"
+    "static/js/main.c5d81758.js"
   ]
 }
