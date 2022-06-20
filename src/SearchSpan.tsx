@@ -34,7 +34,7 @@ export function Searcher(prop:SearcherProps) {
     .then(function(response) {
       let page = response.query.pages
       let keyOfPage = Object.keys(page)[0]
-      console.log(page[keyOfPage].revisions[0].slots.main["*"])
+      // console.log(page[keyOfPage].revisions[0].slots.main["*"])
       setFetchResult(page[keyOfPage].revisions[0].slots.main["*"])
 
     })
@@ -87,6 +87,7 @@ export function Searcher(prop:SearcherProps) {
 
       if(languageItems.length==1){
         let entry:RegExpMatchArray = languageItems[0]!
+        toSetLister.push(<p><b>{`One Pronunciation`}</b></p>)
         entryMaker(entry)
       }
       else{

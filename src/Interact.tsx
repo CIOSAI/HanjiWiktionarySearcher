@@ -17,13 +17,15 @@ export function Interact() {
     for(let i of Array.from(languageCode.keys())){
       toSetLanguageOptions.push(
         <li key={i}>
-          <input type={"checkbox"} name={i} checked={i==languageCodeEnum.MANDARIN} onChange={(evt)=>{
+          <input type={"checkbox"} name={i}
+          defaultChecked={i==languageCodeEnum.MANDARIN}
+          onChange={(evt)=>{
             selectLanguage(evt.currentTarget.name, evt.currentTarget.checked)
           }}></input>
           <label>{languageCode.get(i)}</label>
         </li>
       )
-      selectLanguage(i, false)
+      selectLanguage(i, i==languageCodeEnum.MANDARIN)
     }
     setLanguageOptions(toSetLanguageOptions)
 
@@ -37,8 +39,8 @@ export function Interact() {
         }}></input>
       <ul className='langSel'>{languageOptions}</ul>
       <div>
-        {textArray.map(v=>{
-          return <Searcher key={v} character={v} mask={selectedLanguages}></Searcher>
+        {textArray.map((v, i)=>{
+          return <Searcher key={v+i.toString()} character={v} mask={selectedLanguages}></Searcher>
         })}
       </div>
     </div>
