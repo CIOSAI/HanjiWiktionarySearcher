@@ -11,10 +11,10 @@ export function Interact() {
     let toSetLanguageOptions = []
     for(let i of Array.from(languageCode.keys())){
       toSetLanguageOptions.push(
-        <div key={i}>
+        <li key={i}>
           <input type={"checkbox"} name={i}></input>
           <label>{languageCode.get(i)}</label>
-        </div>
+        </li>
       )
     }
     setLanguageOptions(toSetLanguageOptions)
@@ -27,7 +27,7 @@ export function Interact() {
       <input type={'text'} onKeyDown={(evt) => {
           if(evt.key=='Enter') setTextArray(evt.currentTarget.value.split(""));
         }}></input>
-      <ul>{languageOptions}</ul>
+      <ul className='langSel'>{languageOptions}</ul>
       <div>
         {textArray.map(v=>{
           return <Searcher key={v} character={v}></Searcher>

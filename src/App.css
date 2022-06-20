@@ -78,3 +78,12 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
+
+ul.langSel {
+  padding-left: 0px;
+  text-align: center;
+}
+ul.langSel > li {
+  display: inline-block;
+  padding: none;
+}
