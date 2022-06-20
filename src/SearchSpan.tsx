@@ -29,6 +29,8 @@ export function Searcher(prop:SearcherProps) {
     ])
     params.forEach((v, k)=>{url += "&" + k + "=" + v})
 
+    url += '&origin=*'
+
     fetch(url)
     .then(function(response){return response.json();})
     .then(function(response) {
