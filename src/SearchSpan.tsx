@@ -53,17 +53,21 @@ export function Searcher(prop:SearcherProps) {
   useEffect(()=>{
     if(fetchResult.length>0){
       let splitted = fetchResult.split(/={3}Pronunciation/)
-      let filtered = splitted.filter(v=>v.includes("zh")&&(!v.includes("{{character info}}")))
-      let languageItems = filtered.map(v=>v.match(/(\|)(\w+=[\p{Letter}]+.*)/gu))
+      let filtered = splitted.filter(v=>v.includes("zh")&&(!v.includes("{{character info")))
+      let languageItems = filtered.map(v=>v.match(/(\|)(\w+-?\w*=[\p{Letter}]+.*)/gu))
       // langaugeItems 2 d array, [pronunciation][dialect]
+      // console.log(filtered)
       // console.log(languageItems)
 
       let entry:RegExpMatchArray = languageItems[0]!
+
+      console.log(entry)
       
       setLister(
         entry.map((v, i, arr)=>{
           let k = v.substring(1, v.indexOf("="))
           let content = v.substring(v.indexOf("=")+1)
+          // console.log(content)
           return <p key={i}>{languageCode.has(k)?languageCode.get(k)+":"+content:""}</p>
       })
       )
